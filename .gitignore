@@ -1,0 +1,4 @@
+# ignore these
+bin
+obj
+.dll
