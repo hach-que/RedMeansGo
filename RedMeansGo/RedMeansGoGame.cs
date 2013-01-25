@@ -24,8 +24,9 @@ namespace RedMeansGo
             this.m_GameContext.Graphics.PreferredBackBufferWidth = 800;
             this.m_GameContext.Graphics.PreferredBackBufferHeight = 600;
 
-            // Load our initial level.
-            this.World.LoadLevel("Level0");
+            // Create initial blank level.
+            this.World.CreateBlankLevel("world");
+			this.World.SpawnPlayer<Player>(200, 200);
         }
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace RedMeansGo
         {
             base.Initialize();
 
-            this.Window.Title = "Protogame Example!";
+            this.Window.Title = "Red Means Go!";
         }
 
         /// <summary>

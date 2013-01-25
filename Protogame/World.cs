@@ -87,6 +87,20 @@ namespace Protogame
                 if (t is EntityTile)
                     this.Entities.Add(t as EntityTile);
         }
+
+        /// <summary>
+        /// Creates a new blank level with no entities or tileset.  Useful for games that are not level-orientated.
+        /// </summary>
+        public void CreateBlankLevel(string name)
+        {
+            // Perform the actual level switch.
+            foreach (IEntity ee in this.Entities)
+                if (ee is AudioEntity)
+                    (ee as AudioEntity).Stop();
+            this.Entities.Clear();
+            this.Tileset = TilesetXmlLoader.CreateBlank();
+            this.CurrentLevel = name;
+        }
         
         /// <summary>
         /// Performs any custom drawing events for this world, prior to everything else being drawn.

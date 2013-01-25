@@ -140,6 +140,11 @@ namespace Protogame
             }
         }
 
+		public static Tileset CreateBlank()
+		{
+			return new Tileset();
+		}
+
         public static Tileset Load(string filename)
         {
             if (TilesetXmlLoader.TileTypes == null)
