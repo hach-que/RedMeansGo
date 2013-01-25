@@ -13,31 +13,30 @@
     <AssemblyName>RedMeansGo</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="MonoGame.Framework">
-      <HintPath>..\Libraries\MonoGameOnLinux\MonoGame.Framework.dll</HintPath>
+    <Reference Include="MonoGame.Framework" />
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -46,8 +45,11 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="RedMeansGoWorld.cs" />
     <Compile Include="RedMeansGoGame.cs" />
+    <Compile Include="Pathing\IPathing.cs" />
+    <Compile Include="Pathing\StraightLinePath.cs" />
     <Compile Include="Entities\PlayerBullet.cs" />
     <Compile Include="Heartbeat\HeartbeatEnumerator.cs" />
+    <Compile Include="Entities\EnemyGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
@@ -55,7 +57,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Level0.oel">
-      <DeployService-Deploy>true</DeployService-Deploy>
+      <DeployService-Deploy>True</DeployService-Deploy>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\Arial.xnb">
@@ -80,6 +82,7 @@
     <Folder Include="Content\" />
     <Folder Include="Content\player\" />
     <Folder Include="Heartbeat\" />
+    <Folder Include="Pathing\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.desktop">
@@ -107,7 +110,7 @@
           <TextStylePolicy EolMarker="Unix" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="application/xml" />
           <XmlFormattingPolicy inheritsSet="Mono" inheritsScope="application/xml" scope="application/xml" />
           <TextStylePolicy EolMarker="Unix" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/x-csharp" />
-          <StandardHeader Text="&#xD;&#xA;This source code is licensed in accordance with the licensing outlined&#xA;on the main Tychaia website (www.tychaia.com).  Changes to the&#xA;license on the website apply retroactively.&#xA;" IncludeInNewFiles="True" />
+          <StandardHeader Text="&#xA;This source code is licensed in accordance with the licensing outlined&#xA;on the main Tychaia website (www.tychaia.com).  Changes to the&#xA;license on the website apply retroactively.&#xA;" IncludeInNewFiles="True" />
           <NameConventionPolicy>
             <Rules>
               <NamingRule Name="Namespaces" AffectedEntity="Namespace" VisibilityMask="VisibilityMask" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True" />
