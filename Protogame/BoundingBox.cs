@@ -28,8 +28,18 @@ namespace Protogame
             float aY2 = a.Y + a.Height;
             float bX2 = b.X + b.Width;
             float bY2 = b.Y + b.Height;
+            if (a is IEntity)
+            {
+                aX2 += (a as IEntity).Origin.X;
+                aY2 += (a as IEntity).Origin.Y;
+            }
+            if (b is IEntity)
+            {
+                bX2 += (b as IEntity).Origin.X;
+                bY2 += (b as IEntity).Origin.Y;
+            }
             return (a.X - Math.Abs(a.XSpeed) < bX2 + Math.Abs(b.XSpeed) && aX2 + Math.Abs(a.XSpeed) > b.X - Math.Abs(b.XSpeed) &&
-                    a.Y < bY2 && aY2 > b.Y);
+                a.Y < bY2 && aY2 > b.Y);
         }
     }
 }

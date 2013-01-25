@@ -42,7 +42,7 @@ namespace Protogame.SHMUP
 
         public virtual void MoveRight(World world)
         {
-            if (this.CollidesWithSolidAt(world, (int)(this.X + this.PlayerMovementSpeed), (int)this.Y + 1))
+            if (this.CollidesWithSolidAt(world, (int)(this.X + this.PlayerMovementSpeed), (int)this.Y - 1))
                 this.MoveUntilContact(world, 1, 0, this.PlayerMovementSpeed);
             else
                 this.X += this.PlayerMovementSpeed;
@@ -50,7 +50,7 @@ namespace Protogame.SHMUP
 
         public virtual void MoveDown(World world)
         {
-            if (this.CollidesWithSolidAt(world, (int)(this.X + 1), (int)(this.Y + this.PlayerMovementSpeed)))
+            if (this.CollidesWithSolidAt(world, (int)(this.X - 1), (int)(this.Y + this.PlayerMovementSpeed)))
                 this.MoveUntilContact(world, 0, 1, this.PlayerMovementSpeed);
             else
                 this.Y += this.PlayerMovementSpeed;

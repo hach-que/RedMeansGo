@@ -16,7 +16,7 @@ namespace Protogame
         Color Color { get; set; }
         bool ImageFlipX { get; set; }
         double Rotation { get; set; }
-        Vector2 ImageOrigin { get; set; }
+        Vector2 Origin { get; set; }
 
         void Update(World world);
         void Draw(World world, XnaGraphics graphics);

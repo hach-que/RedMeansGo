@@ -21,7 +21,7 @@ namespace RedMeansGo.Entities
             this.Width = 32;
             this.Height = 32;
             this.ImageSpeed = 5;
-            this.ImageOrigin = new Vector2(16, 16);
+            this.Origin = new Vector2(16, 16);
         }
 
         public override void Update(World world)

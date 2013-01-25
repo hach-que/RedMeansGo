@@ -24,7 +24,7 @@ namespace Protogame
         public float YSpeed { get; set; }
         public int ImageSpeed { get; set; }
         public double Rotation { get; set; }
-        public Vector2 ImageOrigin { get; set; }
+        public Vector2 Origin { get; set; }
 
         public Entity()
         {
