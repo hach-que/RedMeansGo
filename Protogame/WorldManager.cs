@@ -39,7 +39,7 @@ namespace Protogame
 
         private void HandleRenderOfEntity(GameContext context, IEntity a)
         {
-            this.DrawSpriteAt(context, (float)a.X, (float)a.Y, a.Width, a.Height, a.Image, a.Color, a.ImageFlipX, a.Rotation, a.ImageOrigin);
+            this.DrawSpriteAt(context, (float)a.X, (float)a.Y, a.Width, a.Height, a.Image, a.Color, a.ImageFlipX, a.Rotation, a.Origin);
 
             // Check to see if this entity is residing on an edge of the screen.
             if (a.X >= Tileset.TILESET_PIXEL_WIDTH)
@@ -49,7 +49,7 @@ namespace Protogame
             if (a.X > Tileset.TILESET_PIXEL_WIDTH - a.Width)
             {
                 // Draw a mirror image on the left side of the screen.
-                this.DrawSpriteAt(context, (float)a.X - Tileset.TILESET_PIXEL_WIDTH, (float)a.Y, a.Width, a.Height, a.Image, a.Color, a.ImageFlipX, a.Rotation, a.ImageOrigin);
+                this.DrawSpriteAt(context, (float)a.X - Tileset.TILESET_PIXEL_WIDTH, (float)a.Y, a.Width, a.Height, a.Image, a.Color, a.ImageFlipX, a.Rotation, a.Origin);
             }
         }
 

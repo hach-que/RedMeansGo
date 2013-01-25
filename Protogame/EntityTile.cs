@@ -9,7 +9,7 @@ namespace Protogame
     public class EntityTile : Tile, IEntity
     {
         public bool ImageFlipX { get; set; }
-        public Vector2 ImageOrigin
+        public Vector2 Origin
         {
             get { return new Vector2(0, 0); }
             set { }
