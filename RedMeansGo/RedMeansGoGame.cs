@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 using Protogame.SHMUP;
 using RedMeansGo.Entities;
+using Protogame;
 
 namespace RedMeansGo
 {
@@ -22,7 +23,10 @@ namespace RedMeansGo
     {
         #region Fix
 
-        private int m_Alt = 800;
+        public static int GAME_WIDTH = 1024;
+        public static int GAME_HEIGHT = 768;
+
+        private int m_Alt = GAME_WIDTH;
         private int m_FixerCount = 0;
 
         public void FixResolution()
@@ -32,14 +36,14 @@ namespace RedMeansGo
             {
                 if (m_FixerCount++ < 60)
                 {
-                    this.m_Alt = this.m_Alt == 800 ? 801 : 800;
+                    this.m_Alt = this.m_Alt == GAME_WIDTH ? GAME_WIDTH-1 : GAME_WIDTH;
                     this.m_GameContext.Graphics.SynchronizeWithVerticalRetrace = true;
                     this.m_GameContext.Graphics.PreferredBackBufferWidth = this.m_Alt;
-                    this.m_GameContext.Graphics.PreferredBackBufferHeight = 600;
+                    this.m_GameContext.Graphics.PreferredBackBufferHeight = GAME_HEIGHT;
                     this.GraphicsDevice.Viewport.X = 0;
                     this.GraphicsDevice.Viewport.Y = 0;
-                    this.GraphicsDevice.Viewport.Width = 800;
-                    this.GraphicsDevice.Viewport.Height = 600;
+                    this.GraphicsDevice.Viewport.Width = GAME_WIDTH;
+                    this.GraphicsDevice.Viewport.Height = GAME_HEIGHT;
                     this.m_GameContext.Graphics.ApplyChanges();
                 }
             }
@@ -50,11 +54,10 @@ namespace RedMeansGo
         public RedMeansGoGame()
         {
             this.FixResolution();
-            this.IsMouseVisible = false;
 
             // Create initial blank level.
             this.World.CreateBlankLevel("world");
-			this.World.SpawnPlayer<RedMeansGo.Entities.Player>(200, 200);
+            this.World.Restart();
             this.World.Game = this;
         }
 
@@ -86,7 +89,7 @@ namespace RedMeansGo
             this.m_GameContext.LoadTexture("player.powerup");
             this.m_GameContext.LoadTexture("player.bullet");
             this.m_GameContext.LoadTexture("star");
-            this.m_GameContext.LoadTexture("enemy.enemy1");
+            this.m_GameContext.LoadTexture("enemy.bigbullet");
             this.m_GameContext.LoadAudio("audio.sfx.example");
         }
 

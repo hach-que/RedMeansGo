@@ -26,6 +26,12 @@ namespace RedMeansGo
             this.Heartbeats = Heartbeat.HeartbeatEnumerator.YieldHeartbeats(this).GetEnumerator();
         }
 
+        public void Restart()
+        {
+            this.Entities.Clear();
+            this.SpawnPlayer<RedMeansGo.Entities.Player>(Tileset.TILESET_PIXEL_WIDTH / 2, Tileset.TILESET_PIXEL_HEIGHT - 200);
+        }
+
         public override void DrawBelow(GameContext context)
         {
             // Clear the screen.
@@ -35,8 +41,8 @@ namespace RedMeansGo
             {
                 this.BackgroundColor = new Color(
                     (float)(
-                        ((1 - (this.Player as Entities.Player).Health) * 0.05) +
-                    ((1 - (this.Player as Entities.Player).Health) * 0.15) *
+                        ((1) * 0.05) +
+                    ((1) * 0.15) *
                     (this.Heartbeats.Current / 2 + 0.5)
                     ),
                     0,
@@ -47,11 +53,15 @@ namespace RedMeansGo
 
             // Create stars.
             foreach (var e in this.Entities)
-                if (e is RedMeansGo.Entities.Star)
+                if (e is RedMeansGo.Entities.WhiteBloodCell || e is RedMeansGo.Entities.RedBloodCell)
                 {
                     double heartbeat = this.Heartbeats.Current;
                     var s = (int)((heartbeat + 1) / 2 + 1);
-                    context.SpriteBatch.Draw(context.Textures["star"], new Rectangle((int)e.X, (int)e.Y, s, s), e.Color);
+                    if (e is RedMeansGo.Entities.WhiteBloodCell)
+                    s += 5;
+                    context.SpriteBatch.Draw(
+                    context.Textures[e is RedMeansGo.Entities.WhiteBloodCell ? "enemy.bigbullet" : "star"], 
+                    new Rectangle((int)e.X, (int)e.Y, s, s), null, e.Color, (float)e.Rotation, e.Origin, SpriteEffects.None, 1f);
                 }
         }
 
@@ -73,32 +83,50 @@ namespace RedMeansGo
 
             // Draw some stars if we feel like it.
             for (var i = 0; i < m_Random.NextDouble() * 150; i++)
+                this.Entities.Add(new RedMeansGo.Entities.RedBloodCell {
+                    X = (float)m_Random.NextDouble() * Tileset.TILESET_PIXEL_WIDTH,
+                    Y = this.Player.Y - RedMeansGoGame.GAME_WIDTH / 2,
+                    Speed = 3 * (float)m_Random.NextDouble() + 1
+                });
+            for (var i = 0; i < m_Random.NextDouble() * 150; i++)
                 if (m_Random.NextDouble() < 0.1)
-                    this.Entities.Add(new RedMeansGo.Entities.Star {
+                    this.Entities.Add(new RedMeansGo.Entities.WhiteBloodCell {
                         X = (float)m_Random.NextDouble() * Tileset.TILESET_PIXEL_WIDTH,
-                        Y = -1,
+                        Y = this.Player.Y - RedMeansGoGame.GAME_WIDTH / 2,
                         Speed = 3 * (float)m_Random.NextDouble() + 1
                     }
                     );
 
-            // Create some enemies.
-            if (m_Random.NextDouble() < 0.1)
-                this.Entities.Add(new Enemy());
-
             // Cast first.
             RedMeansGo.Entities.Player player = this.Player as RedMeansGo.Entities.Player;
+
+            // Move viewport to player.
+            context.Graphics.GraphicsDevice.Viewport
+                 = new Viewport(-(int)player.X + RedMeansGoGame.GAME_WIDTH / 2, -(int)player.Y + RedMeansGoGame.GAME_HEIGHT / 2, Tileset.TILESET_PIXEL_WIDTH, Tileset.TILESET_PIXEL_HEIGHT);
 
             // Handle if player exists.
             if (player != null)
             {
-                var state = Mouse.GetState();
+                /*var state = Mouse.GetState();
                 player.X = state.X;
-                player.Y = state.Y;
+                player.Y = state.Y;*/
+                
+                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                    player.MoveLeft(this);
+                if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                    player.MoveUp(this);
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                    player.MoveRight(this);
+                if (Keyboard.GetState().IsKeyDown(Keys.Down))
+                    player.MoveDown(this);
+                if (Keyboard.GetState().IsKeyUp(Keys.Left) && Keyboard.GetState().IsKeyUp(Keys.Up) &&
+                    Keyboard.GetState().IsKeyUp(Keys.Right) && Keyboard.GetState().IsKeyUp(Keys.Down))
+                    player.MoveEnd();
 
                 if (Keyboard.GetState().IsKeyDown(Keys.A) && player.Health > 0)
                     player.Health -= 0.001;
 
-                if (state.LeftButton == ButtonState.Pressed)
+                if (Keyboard.GetState().IsKeyDown(Keys.Z))
                 {
                     player.ShootSomeMotherFudgingBullets(context.World);
                 }

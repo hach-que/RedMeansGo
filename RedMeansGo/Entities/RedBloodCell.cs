@@ -10,19 +10,21 @@ using Microsoft.Xna.Framework;
 
 namespace RedMeansGo.Entities
 {
-    public class Star : Entity
+    public class RedBloodCell : Entity
     {
         public float Speed { get; set; }
 
         public override void Update(World world)
         {
             this.Y += this.Speed;
+            this.X += (float)(Math.Cos(
+                (Tileset.TILESET_PIXEL_HEIGHT - RedMeansGoGame.GAME_HEIGHT) / 20
+                * Math.PI * 2) * this.Speed);
 
             if (this.Y > Tileset.TILESET_PIXEL_HEIGHT)
                 world.Entities.Remove(this);
 
-            this.Color = new Color(255, 255 - (world as RedMeansGoWorld).BackgroundColor.R * 10,
-                                   255 - (world as RedMeansGoWorld).BackgroundColor.R * 10);
+            this.Color = new Color(127, 0, 0);
 
             base.Update(world);
         }

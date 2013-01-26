@@ -33,6 +33,7 @@ namespace Protogame
             };
             this.m_WorldManager = new WorldManager();
             this.World.GameContext = this.m_GameContext;
+
         }
 
         /// <summary>

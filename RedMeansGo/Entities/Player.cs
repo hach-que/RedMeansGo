@@ -20,8 +20,8 @@ namespace RedMeansGo.Entities
         public double Health { get; set; }
         public IWeapon Weapon { get; set ;}
 
-        private const int WIDTH = 62;
-        private const int HEIGHT = 62;
+        private const int WIDTH = 31;
+        private const int HEIGHT = 31;
 
         public Player()
         {
@@ -54,10 +54,23 @@ namespace RedMeansGo.Entities
                 this.Rotation += 0.1 * ((1 - this.Health) * 0.3 + 1);
 
             double heartbeat = (world as RedMeansGoWorld).Heartbeats.Current;
-            if (this.Health <= 0) heartbeat = -0.4; // You're dead :(
+            if (this.Health <= 0)
+                heartbeat = -0.4; // You're dead :(
             this.Width = (int)(WIDTH * (heartbeat * 0.15 + 1));
             this.Height = (int)(HEIGHT * (heartbeat * 0.15 + 1));
             //this.Origin = new Vector2(this.Width / 2, this.Height / 2);
+
+            if (this.X < RedMeansGoGame.GAME_WIDTH / 2)
+                this.X = RedMeansGoGame.GAME_WIDTH / 2;
+            if (this.X > Tileset.TILESET_PIXEL_WIDTH - RedMeansGoGame.GAME_WIDTH / 2)
+                this.X = Tileset.TILESET_PIXEL_WIDTH - RedMeansGoGame.GAME_WIDTH / 2;
+            if (this.Y > Tileset.TILESET_PIXEL_HEIGHT - RedMeansGoGame.GAME_HEIGHT / 2)
+                this.Y = Tileset.TILESET_PIXEL_HEIGHT - RedMeansGoGame.GAME_HEIGHT / 2;
+            if (this.Y < RedMeansGoGame.GAME_HEIGHT / 2)
+            {
+                foreach (var e in world.Entities)
+                    e.Y += Tileset.TILESET_PIXEL_HEIGHT - RedMeansGoGame.GAME_HEIGHT;
+            }
         }
 
         public void ShootSomeMotherFudgingBullets(World world)

@@ -64,7 +64,7 @@ namespace Protogame
             context.World.DrawBelow(context);
 
             // Render all of the tiles.
-            for (int z = 0; z < Tileset.TILESET_DEPTH; z += 1)
+            /*for (int z = 0; z < Tileset.TILESET_DEPTH; z += 1)
             {
                 for (int x = context.Graphics.GraphicsDevice.Viewport.X / Tileset.TILESET_CELL_WIDTH;
                             x < Math.Min(context.Graphics.GraphicsDevice.Viewport.X + context.Graphics.GraphicsDevice.Viewport.Width / Tileset.TILESET_CELL_WIDTH,
@@ -89,7 +89,7 @@ namespace Protogame
                         );
                     }
                 }
-            }
+            }*/
 
             // Render all of the actors.
             foreach (IEntity a in context.World.Entities)
