@@ -20,15 +20,41 @@ namespace RedMeansGo
     /// </summary>
     public class RedMeansGoGame : ShmupGame<RedMeansGoWorld>
     {
+        #region Fix
+
+        private int m_Alt = 800;
+        private int m_FixerCount = 0;
+
+        public void FixResolution()
+        {
+            int p = (int)Environment.OSVersion.Platform;
+            if ((p == 4) || (p == 128))
+            {
+                if (m_FixerCount++ < 60)
+                {
+                    this.m_Alt = this.m_Alt == 800 ? 801 : 800;
+                    this.m_GameContext.Graphics.PreferredBackBufferWidth = this.m_Alt;
+                    this.m_GameContext.Graphics.PreferredBackBufferHeight = 600;
+                    this.GraphicsDevice.Viewport.X = 0;
+                    this.GraphicsDevice.Viewport.Y = 0;
+                    this.GraphicsDevice.Viewport.Width = 800;
+                    this.GraphicsDevice.Viewport.Height = 600;
+                    this.m_GameContext.Graphics.ApplyChanges();
+                }
+            }
+        }
+
+        #endregion
+
         public RedMeansGoGame()
         {
-            this.m_GameContext.Graphics.IsFullScreen = true;
-            this.m_GameContext.Graphics.PreferredBackBufferWidth = 1920;
-            this.m_GameContext.Graphics.PreferredBackBufferHeight = 1080;
+            this.FixResolution();
+            this.IsMouseVisible = false;
 
             // Create initial blank level.
             this.World.CreateBlankLevel("world");
 			this.World.SpawnPlayer<RedMeansGo.Entities.Player>(200, 200);
+            this.World.Game = this;
         }
 
         /// <summary>

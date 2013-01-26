@@ -15,7 +15,7 @@ namespace RedMeansGo
     public class RedMeansGoWorld : ShmupWorld
     {
         public RedMeansGoGame Game { get; set; }
-        
+
         public override void DrawBelow(GameContext context)
         {
             // Clear the screen.
@@ -32,6 +32,8 @@ namespace RedMeansGo
 
         public override bool Update(GameContext context)
         {
+            this.Game.FixResolution();
+
             bool handle = base.Update(context);
             if (!handle)
                 return false;
@@ -42,6 +44,10 @@ namespace RedMeansGo
             // Handle if player exists.
             if (player != null)
             {
+                var state = Mouse.GetState();
+                player.X = state.X;
+                player.Y = state.Y;
+
                 // Send input.
                 if (Keyboard.GetState().IsKeyDown(Keys.Left))
                     player.MoveLeft(this);
