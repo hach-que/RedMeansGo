@@ -46,6 +46,8 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="RedMeansGoWorld.cs" />
     <Compile Include="RedMeansGoGame.cs" />
+    <Compile Include="Entities\PlayerBullet.cs" />
+    <Compile Include="Heartbeat\HeartbeatEnumerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
@@ -68,12 +70,16 @@
     <None Include="Content\player\powerup.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\player\bullet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="Resources\" />
     <Folder Include="Content\" />
     <Folder Include="Content\player\" />
+    <Folder Include="Heartbeat\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.desktop">

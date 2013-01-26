@@ -33,6 +33,7 @@ namespace RedMeansGo
                 if (m_FixerCount++ < 60)
                 {
                     this.m_Alt = this.m_Alt == 800 ? 801 : 800;
+                    this.m_GameContext.Graphics.SynchronizeWithVerticalRetrace = true;
                     this.m_GameContext.Graphics.PreferredBackBufferWidth = this.m_Alt;
                     this.m_GameContext.Graphics.PreferredBackBufferHeight = 600;
                     this.GraphicsDevice.Viewport.X = 0;
@@ -83,6 +84,7 @@ namespace RedMeansGo
             this.m_GameContext.LoadFont("Arial");
             this.m_GameContext.LoadTexture("player.main");
             this.m_GameContext.LoadTexture("player.powerup");
+            this.m_GameContext.LoadTexture("player.bullet");
             this.m_GameContext.LoadAudio("audio.sfx.example");
         }
 
