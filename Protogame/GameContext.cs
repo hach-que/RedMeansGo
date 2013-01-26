@@ -33,9 +33,9 @@ namespace Protogame
             this.Fonts.Add(name, this.Content.Load<SpriteFont>(name.Replace('.', '/')));
         }
 
-        public void LoadTexture(string name)
-        {
-            this.Textures.Add(name, this.Content.Load<Texture2D>(name.Replace('.', '/')));
+        public void LoadTexture (string name)
+		{
+			this.Textures.Add (name, this.Content.Load<Texture2D> (name.Replace ('.', '/')));
         }
 
         public void LoadTextureAnim(string name, int end)

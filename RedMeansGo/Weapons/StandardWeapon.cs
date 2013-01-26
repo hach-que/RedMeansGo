@@ -13,7 +13,7 @@ namespace RedMeansGo.Weapons
     {
         public void Fire(World world, Player player)
         {
-            if ((world as RedMeansGoWorld).Heartbeats.Current > 0.3)
+            //if ((world as RedMeansGoWorld).Heartbeats.Current > 0.3)
                 world.Entities.Add(new StandardBullet { X = player.X, Y = player.Y });
         }
     }

@@ -39,6 +39,10 @@ namespace RedMeansGo.Entities
             this.Width = (int)(8 * (heartbeat * 0.2 + 1));
             this.Height = (int)(8 * (heartbeat * 0.2 + 1));
 
+            var enemy = this.CollidesAt<Enemy>(world, (int)this.X, (int)this.Y);
+            if (enemy != null)
+                enemy.Health -= 1;
+
             base.Update(world);
         }
     }

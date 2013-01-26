@@ -30,6 +30,7 @@ namespace RedMeansGo.Entities
                 RedMeansGoWorld.m_Random.Next(0, 256),
                 RedMeansGoWorld.m_Random.Next(0, 256),
                 RedMeansGoWorld.m_Random.Next(0, 256));
+            this.Health = RedMeansGoWorld.m_Random.Next(1, 9);
         }
 
         public override void Update(World world)
@@ -42,8 +43,11 @@ namespace RedMeansGo.Entities
             if (!this.Path.MoveNext())
                 world.Entities.Remove(this);
 
-            if (this.X != 0 || this.Y != 0)
+            if ((this.X != 0 || this.Y != 0) && this.Health >= 0)
                 this.Images = this.GetTexture("enemy.enemy" + (int)(Math.Floor(this.Health) + 1));
+
+            if (this.Health <= 0)
+                world.Entities.Remove(this);
             
             double heartbeat = (world as RedMeansGoWorld).Heartbeats.Current;
             this.Width = (int)(32 * (heartbeat * 0.15 + 1));

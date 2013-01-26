@@ -86,7 +86,8 @@ namespace RedMeansGo
             this.m_GameContext.LoadTexture("player.powerup");
             this.m_GameContext.LoadTexture("player.bullet");
             this.m_GameContext.LoadTexture("star");
-            this.m_GameContext.LoadTexture("enemy.enemy1");
+            for (int i = 1; i < 10; i++)
+                this.m_GameContext.LoadTexture("enemy.enemy" + i);
             this.m_GameContext.LoadAudio("audio.sfx.example");
         }
 
