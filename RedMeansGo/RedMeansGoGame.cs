@@ -36,14 +36,23 @@ namespace RedMeansGo
             {
                 if (m_FixerCount++ < 60)
                 {
-                    this.m_Alt = this.m_Alt == GAME_WIDTH ? GAME_WIDTH-1 : GAME_WIDTH;
+                    this.m_Alt = this.m_Alt == GAME_WIDTH ? GAME_WIDTH - 1 : GAME_WIDTH;
+                    if (Environment.OSVersion.Platform == PlatformID.Win32Windows ||
+                        Environment.OSVersion.Platform == PlatformID.Win32NT || 
+                        Environment.OSVersion.Platform == PlatformID.Win32S)
+                    {
+                        this.m_GameContext.Graphics.IsFullScreen = false;
+                        this.m_GameContext.Graphics.ApplyChanges();
+                    }
                     this.m_GameContext.Graphics.SynchronizeWithVerticalRetrace = true;
                     this.m_GameContext.Graphics.PreferredBackBufferWidth = this.m_Alt;
                     this.m_GameContext.Graphics.PreferredBackBufferHeight = GAME_HEIGHT;
-                    this.GraphicsDevice.Viewport.X = 0;
-                    this.GraphicsDevice.Viewport.Y = 0;
-                    this.GraphicsDevice.Viewport.Width = GAME_WIDTH;
-                    this.GraphicsDevice.Viewport.Height = GAME_HEIGHT;
+#if __MonoCS__
+                    this.m_GameContext.Graphics.GraphicsDevice.Viewport.X = 0;
+                    this.m_GameContext.Graphics.GraphicsDevice.Viewport.Y = 0;
+                    this.m_GameContext.Graphics.GraphicsDevice.Viewport.Width = GAME_WIDTH;
+                    this.m_GameContext.Graphics.GraphicsDevice.Viewport.Height = GAME_HEIGHT;
+#endif
                     this.m_GameContext.Graphics.ApplyChanges();
                 }
             }

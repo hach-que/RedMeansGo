@@ -65,7 +65,7 @@ namespace RedMeansGo
                     double heartbeat = this.Heartbeats.Current;
                     var s = (int)((heartbeat + 1) / 2 + 1);
                     if (e is RedMeansGo.Entities.WhiteBloodCell)
-                    s += 5;
+                        s += 5;
                     context.SpriteBatch.Draw(
                     context.Textures[e is RedMeansGo.Entities.WhiteBloodCell ? "enemy.bigbullet" : "star"], 
                     new Rectangle((int)e.X, (int)e.Y, s, s), null, e.Color, (float)e.Rotation, e.Origin, SpriteEffects.None, 1f);
@@ -133,6 +133,10 @@ namespace RedMeansGo
                 if (Keyboard.GetState().IsKeyDown(Keys.Z))
                 {
                     player.ShootSomeMotherFudgingBullets(context.World);
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.R))
+                {
+                    this.Restart();
                 }
             }
 

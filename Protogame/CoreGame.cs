@@ -31,6 +31,15 @@ namespace Protogame
                 World = new T(),
                 Graphics = new GraphicsDeviceManager(this)
             };
+            if (Environment.OSVersion.Platform == PlatformID.Win32Windows ||
+                Environment.OSVersion.Platform == PlatformID.Win32NT || 
+                Environment.OSVersion.Platform == PlatformID.Win32S)
+            {
+                this.m_GameContext.Graphics.IsFullScreen = false;
+                this.m_GameContext.Graphics.PreferredBackBufferWidth = 1024;
+                this.m_GameContext.Graphics.PreferredBackBufferHeight = 768;
+                this.m_GameContext.Graphics.ApplyChanges();
+            }
             this.m_WorldManager = new WorldManager();
             this.World.GameContext = this.m_GameContext;
 
@@ -58,7 +67,7 @@ namespace Protogame
             // Create a new SpriteBatch, which can be used to draw textures.
             this.m_GameContext.SpriteBatch = new SpriteBatch(this.GraphicsDevice);
         }
-
+         
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
