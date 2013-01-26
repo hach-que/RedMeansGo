@@ -17,7 +17,7 @@ namespace RedMeansGo
     {
         public RedMeansGoGame Game { get; set; }
 
-        public readonly IEnumerator<double> Heartbeats;
+        public IEnumerator<double> Heartbeats;
         public static Random m_Random = new Random();
         public Color BackgroundColor;
         private BackgroundAudioEntity m_BackgroundAudio;
@@ -84,17 +84,21 @@ namespace RedMeansGo
             for (var i = 0; i < m_Random.NextDouble() * 150; i++)
                 this.Entities.Add(new RedMeansGo.Entities.RedBloodCell {
                     X = (float)m_Random.NextDouble() * Tileset.TILESET_PIXEL_WIDTH,
-                    Y = this.Player.Y - RedMeansGoGame.GAME_WIDTH / 2,
+                    Y = this.Player.Y - RedMeansGoGame.GAME_WIDTH,
                     Speed = 3 * (float)m_Random.NextDouble() + 1
-                });
-            for (var i = 0; i < m_Random.NextDouble() * 150; i++)
-                if (m_Random.NextDouble() < 0.05)
-                    this.Entities.Add(new RedMeansGo.Entities.WhiteBloodCell {
+                }
+                );
+            if ((this.Player as Entities.Player).Health > 0)
+            {
+                for (var i = 0; i < m_Random.NextDouble() * 150; i++)
+                    if (m_Random.NextDouble() < 0.05)
+                        this.Entities.Add(new RedMeansGo.Entities.WhiteBloodCell {
                         X = (float)m_Random.NextDouble() * Tileset.TILESET_PIXEL_WIDTH,
-                        Y = this.Player.Y - RedMeansGoGame.GAME_WIDTH / 2,
+                        Y = this.Player.Y - RedMeansGoGame.GAME_WIDTH,
                         Speed = 3 * (float)m_Random.NextDouble() + 1
                     }
-                    );
+                        );
+            }
 
             // Cast first.
             RedMeansGo.Entities.Player player = this.Player as RedMeansGo.Entities.Player;
@@ -102,7 +106,7 @@ namespace RedMeansGo
 
             // Move viewport to player.
             context.Graphics.GraphicsDevice.Viewport
-                 = new Viewport(-(int)player.X + RedMeansGoGame.GAME_WIDTH / 2, -(int)player.Y + RedMeansGoGame.GAME_HEIGHT / 2, Tileset.TILESET_PIXEL_WIDTH, Tileset.TILESET_PIXEL_HEIGHT);
+                 = new Viewport((int)(-player.X + RedMeansGoGame.GAME_WIDTH / 2f), (int)(-player.Y + RedMeansGoGame.GAME_HEIGHT / 1.2f), Tileset.TILESET_PIXEL_WIDTH, Tileset.TILESET_PIXEL_HEIGHT);
 
             // Handle if player exists.
             if (player != null)
@@ -133,7 +137,13 @@ namespace RedMeansGo
             }
 
             // Update enumerator.
-            this.Heartbeats.MoveNext();
+            if ((this.Player as Entities.Player).Health > 0)
+                this.Heartbeats.MoveNext();
+            else
+            {
+                this.Heartbeats = Heartbeat.HeartbeatEnumerator.YieldStopped(this).GetEnumerator();
+                m_BackgroundAudio.Stop();
+            }
 
             // Continue entity updates.
             return true;

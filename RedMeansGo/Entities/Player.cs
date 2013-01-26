@@ -52,7 +52,11 @@ namespace RedMeansGo.Entities
             graphics.DrawSprite((int)this.X, (int)this.Y, this.Width - 8, this.Height - 8, "player.powerup", this.PowerupColor, false, this.Rotation,
                                 new Vector2(54 / 2, 54 / 2));
 
-            var msg = "Distance to Heart: " + (this.Health * 150).ToString("F2") + "cm";
+            string msg;
+            if (this.Health <= 0)
+                msg = "You win.  They died.";
+            else
+                msg = "Distance to Heart: " + (this.Health * 150).ToString("F2") + "cm";
             graphics.DrawStringCentered((int)this.X, (int)this.Y + 40, msg);
             RedMeansGoGame.SetWindowTitle(msg);
 		}

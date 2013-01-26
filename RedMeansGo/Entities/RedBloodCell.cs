@@ -17,6 +17,8 @@ namespace RedMeansGo.Entities
         public override void Update(World world)
         {
             var speed = this.Speed * (1 - ((world as RedMeansGoWorld).Player as Player).Health + 1);
+            if (((world as RedMeansGoWorld).Player as Entities.Player).Health <= 0)
+                speed = 0.1f;
             this.Y += (float)speed;
             this.X += (float)(Math.Cos(this.Y / 
                 ((Tileset.TILESET_PIXEL_HEIGHT - RedMeansGoGame.GAME_HEIGHT) / 2)

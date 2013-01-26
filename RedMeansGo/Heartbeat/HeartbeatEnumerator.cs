@@ -10,6 +10,11 @@ namespace RedMeansGo.Heartbeat
 {
     public static class HeartbeatEnumerator
     {
+        public static IEnumerable<double> YieldStopped(RedMeansGoWorld world)
+        {
+            yield return 0;
+        }
+
         public static IEnumerable<double> YieldHeartbeats(RedMeansGoWorld world)
         {
             while (true)
