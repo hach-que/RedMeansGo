@@ -74,9 +74,6 @@
     <None Include="Content\Arial.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Content\audio\sfx\example.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Content\player\main.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -119,6 +116,9 @@
     <None Include="Content\enemy\bigbullet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\audio\heartbeat.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -129,6 +129,7 @@
     <Folder Include="Pathing\" />
     <Folder Include="Weapons\" />
     <Folder Include="Content\enemy\" />
+    <Folder Include="Content\audio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.desktop">

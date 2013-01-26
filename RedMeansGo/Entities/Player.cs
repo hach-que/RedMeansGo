@@ -13,15 +13,25 @@ namespace RedMeansGo.Entities
     public class Player : Protogame.SHMUP.Player
     {
         // Settings
-        public override float PlayerMovementSpeed { get { return 4; } }
+        public override float PlayerMovementSpeed
+        {
+            get
+            {
+                if (this.m_World == null)
+                    return 0;
+                return (float)(4 * (1 - ((this.m_World as RedMeansGoWorld).Player as Player).Health + 1));
+            }
+        }
+
+        private RedMeansGoWorld m_World;
         public override float PlayerJumpSpeed { get { return 5; } }
         public Color PowerupColor = new Color(255, 0, 0);
         private Random m_Random = new Random();
         public double Health { get; set; }
         public IWeapon Weapon { get; set ;}
 
-        private const int WIDTH = 31;
-        private const int HEIGHT = 31;
+        private const int WIDTH = 15;
+        private const int HEIGHT = 15;
 
         public Player()
         {
@@ -36,16 +46,24 @@ namespace RedMeansGo.Entities
 
 		public override void Draw(World world, XnaGraphics graphics)
 		{
+            this.m_World = world as RedMeansGoWorld;
             base.Draw(world, graphics);
 
             graphics.DrawSprite((int)this.X, (int)this.Y, this.Width - 8, this.Height - 8, "player.powerup", this.PowerupColor, false, this.Rotation,
                                 new Vector2(54 / 2, 54 / 2));
-            //graphics.DrawStringCentered((int)this.X, (int)this.Y, this.Health.ToString());
+
+            var msg = "Distance to Heart: " + (this.Health * 150).ToString("F2") + "cm";
+            graphics.DrawStringCentered((int)this.X, (int)this.Y + 40, msg);
+            RedMeansGoGame.SetWindowTitle(msg);
 		}
 
         public override void Update(World world)
         {
+            this.m_World = world as RedMeansGoWorld;
             base.Update(world);
+
+            // Game pace is set by player health...  reduce it very very slowly.
+            this.Health -= 0.0001;
 
             //this.PowerupColor = new Color((float)m_Random.NextDouble(), (float)m_Random.NextDouble(), (float)m_Random.NextDouble());
             if (this.Health <= 0)
@@ -61,9 +79,15 @@ namespace RedMeansGo.Entities
             //this.Origin = new Vector2(this.Width / 2, this.Height / 2);
 
             if (this.X < RedMeansGoGame.GAME_WIDTH / 2)
-                this.X = RedMeansGoGame.GAME_WIDTH / 2;
+            {
+                foreach (var e in world.Entities)
+                    e.X += Tileset.TILESET_PIXEL_WIDTH - RedMeansGoGame.GAME_WIDTH;
+            }
             if (this.X > Tileset.TILESET_PIXEL_WIDTH - RedMeansGoGame.GAME_WIDTH / 2)
-                this.X = Tileset.TILESET_PIXEL_WIDTH - RedMeansGoGame.GAME_WIDTH / 2;
+            {
+                foreach (var e in world.Entities)
+                    e.X -= Tileset.TILESET_PIXEL_WIDTH - RedMeansGoGame.GAME_WIDTH;
+            }
             if (this.Y > Tileset.TILESET_PIXEL_HEIGHT - RedMeansGoGame.GAME_HEIGHT / 2)
                 this.Y = Tileset.TILESET_PIXEL_HEIGHT - RedMeansGoGame.GAME_HEIGHT / 2;
             if (this.Y < RedMeansGoGame.GAME_HEIGHT / 2)
@@ -71,6 +95,20 @@ namespace RedMeansGo.Entities
                 foreach (var e in world.Entities)
                     e.Y += Tileset.TILESET_PIXEL_HEIGHT - RedMeansGoGame.GAME_HEIGHT;
             }
+        }
+
+        public override void MoveUp(World world)
+        {
+            this.Health -= 0.0002;
+
+            base.MoveUp(world);
+        }
+
+        public override void MoveDown(World world)
+        {
+            this.Health += 0.0002;
+
+            base.MoveDown(world);
         }
 
         public void ShootSomeMotherFudgingBullets(World world)

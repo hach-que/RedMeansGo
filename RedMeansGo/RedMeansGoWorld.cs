@@ -20,6 +20,7 @@ namespace RedMeansGo
         public readonly IEnumerator<double> Heartbeats;
         public static Random m_Random = new Random();
         public Color BackgroundColor;
+        private BackgroundAudioEntity m_BackgroundAudio;
 
         public RedMeansGoWorld()
         {
@@ -28,8 +29,14 @@ namespace RedMeansGo
 
         public void Restart()
         {
+            if (m_BackgroundAudio != null)
+                m_BackgroundAudio.Stop();
             this.Entities.Clear();
             this.SpawnPlayer<RedMeansGo.Entities.Player>(Tileset.TILESET_PIXEL_WIDTH / 2, Tileset.TILESET_PIXEL_HEIGHT - 200);
+
+            m_BackgroundAudio = new BackgroundAudioEntity(this, "audio.heartbeat");
+            m_BackgroundAudio.Start();
+            this.Entities.Add(m_BackgroundAudio);
         }
 
         public override void DrawBelow(GameContext context)
@@ -65,14 +72,6 @@ namespace RedMeansGo
                 }
         }
 
-        public override void DrawAbove(GameContext context)
-        {
-            XnaGraphics gr = new XnaGraphics(context);
-            gr.DrawStringCentered(Tileset.TILESET_PIXEL_WIDTH / 2, 20, "Example Game!");
-
-            base.DrawAbove(context);
-        }
-
         public override bool Update(GameContext context)
         {
             this.Game.FixResolution();
@@ -89,7 +88,7 @@ namespace RedMeansGo
                     Speed = 3 * (float)m_Random.NextDouble() + 1
                 });
             for (var i = 0; i < m_Random.NextDouble() * 150; i++)
-                if (m_Random.NextDouble() < 0.1)
+                if (m_Random.NextDouble() < 0.05)
                     this.Entities.Add(new RedMeansGo.Entities.WhiteBloodCell {
                         X = (float)m_Random.NextDouble() * Tileset.TILESET_PIXEL_WIDTH,
                         Y = this.Player.Y - RedMeansGoGame.GAME_WIDTH / 2,
@@ -99,6 +98,7 @@ namespace RedMeansGo
 
             // Cast first.
             RedMeansGo.Entities.Player player = this.Player as RedMeansGo.Entities.Player;
+            m_BackgroundAudio.Tempo = (float)((1 - player.Health) + 1);
 
             // Move viewport to player.
             context.Graphics.GraphicsDevice.Viewport

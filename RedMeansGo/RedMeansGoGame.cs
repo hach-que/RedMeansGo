@@ -57,7 +57,6 @@ namespace RedMeansGo
 
             // Create initial blank level.
             this.World.CreateBlankLevel("world");
-            this.World.Restart();
             this.World.Game = this;
         }
 
@@ -72,6 +71,7 @@ namespace RedMeansGo
             base.Initialize();
 
             this.Window.Title = "Red Means Go!";
+            StaticWindow = this.Window;
         }
 
         /// <summary>
@@ -90,7 +90,8 @@ namespace RedMeansGo
             this.m_GameContext.LoadTexture("player.bullet");
             this.m_GameContext.LoadTexture("star");
             this.m_GameContext.LoadTexture("enemy.bigbullet");
-            this.m_GameContext.LoadAudio("audio.sfx.example");
+            this.m_GameContext.LoadAudio("audio.heartbeat");
+            this.World.Restart();
         }
 
         /// <summary>
@@ -102,5 +103,13 @@ namespace RedMeansGo
             // TODO: Unload any non ContentManager content here
             base.UnloadContent();
         }
+
+        private static GameWindow StaticWindow;
+
+        public static void SetWindowTitle(string msg)
+        {
+            StaticWindow.Title = msg;
+        }
+
     }
 }

@@ -16,10 +16,11 @@ namespace RedMeansGo.Entities
 
         public override void Update(World world)
         {
-            this.Y += this.Speed;
-            this.X += (float)(Math.Cos(
-                (Tileset.TILESET_PIXEL_HEIGHT - RedMeansGoGame.GAME_HEIGHT) / 20
-                * Math.PI * 2) * this.Speed);
+            var speed = this.Speed * (1 - ((world as RedMeansGoWorld).Player as Player).Health + 1);
+            this.Y += (float)speed;
+            this.X += (float)(Math.Cos(this.Y / 
+                ((Tileset.TILESET_PIXEL_HEIGHT - RedMeansGoGame.GAME_HEIGHT) / 2)
+                * Math.PI * 2) * speed);
 
             if (this.Y > Tileset.TILESET_PIXEL_HEIGHT)
                 world.Entities.Remove(this);

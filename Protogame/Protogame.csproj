@@ -116,6 +116,7 @@
     <Compile Include="SHMUP\ShmupWorld.cs" />
     <Compile Include="SHMUP\Player.cs" />
     <Compile Include="OTKWorkaround.cs" />
+    <Compile Include="BackgroundAudioEntity.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
