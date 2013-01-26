@@ -36,6 +36,8 @@ namespace Protogame
         {
             get
             {
+				if (this.Images == null)
+					return null;
                 if (this.m_ImageIndex >= this.Images.Length)
                     this.m_ImageIndex = 0;
                 return this.Images[this.m_ImageIndex];
@@ -112,6 +114,8 @@ namespace Protogame
 
         public virtual void Update(World world)
         {
+			if (this.Images == null)
+				return;
             if (this.m_ImageFrameAlarm == 0)
             {
                 this.m_ImageIndex++;

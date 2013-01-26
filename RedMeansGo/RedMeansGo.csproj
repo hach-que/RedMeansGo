@@ -48,9 +48,15 @@
     <Compile Include="RedMeansGoGame.cs" />
     <Compile Include="Pathing\IPathing.cs" />
     <Compile Include="Pathing\StraightLinePath.cs" />
-    <Compile Include="Entities\PlayerBullet.cs" />
     <Compile Include="Heartbeat\HeartbeatEnumerator.cs" />
     <Compile Include="Entities\EnemyGenerator.cs" />
+    <Compile Include="Weapons\IWeapon.cs" />
+    <Compile Include="Weapons\StandardWeapon.cs" />
+    <Compile Include="Entities\PlayerBullet.cs" />
+    <Compile Include="Weapons\StandardBullet.cs" />
+    <Compile Include="Weapons\StrangeBullet.cs" />
+    <Compile Include="Weapons\StrangeWeapon.cs" />
+    <Compile Include="Entities\Star.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
@@ -76,6 +82,9 @@
     <None Include="Content\player\bullet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\star.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -84,6 +93,7 @@
     <Folder Include="Content\player\" />
     <Folder Include="Heartbeat\" />
     <Folder Include="Pathing\" />
+    <Folder Include="Weapons\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.desktop">

@@ -6,6 +6,7 @@ using Protogame;
 using Protogame.Platformer;
 using Protogame.Particles;
 using Microsoft.Xna.Framework;
+using RedMeansGo.Weapons;
 
 namespace RedMeansGo.Entities
 {
@@ -17,6 +18,7 @@ namespace RedMeansGo.Entities
         public Color PowerupColor = new Color(255, 0, 0);
         private Random m_Random = new Random();
         public double Health { get; set; }
+        public IWeapon Weapon { get; set ;}
 
         private const int WIDTH = 62;
         private const int HEIGHT = 62;
@@ -29,6 +31,7 @@ namespace RedMeansGo.Entities
             this.ImageSpeed = 5;
             this.Origin = new Vector2(31, 31);
             this.Health = 1;
+            this.Weapon = new StandardWeapon();
         }
 
 		public override void Draw(World world, XnaGraphics graphics)
@@ -59,7 +62,7 @@ namespace RedMeansGo.Entities
 
         public void ShootSomeMotherFudgingBullets(World world)
         {
-            world.Entities.Add(new PlayerBullet { X = this.X, Y = this.Y });
+            this.Weapon.Fire(world, this);
         }
     }
 }

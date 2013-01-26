@@ -85,6 +85,7 @@ namespace RedMeansGo
             this.m_GameContext.LoadTexture("player.main");
             this.m_GameContext.LoadTexture("player.powerup");
             this.m_GameContext.LoadTexture("player.bullet");
+            this.m_GameContext.LoadTexture("star");
             this.m_GameContext.LoadAudio("audio.sfx.example");
         }
 
