@@ -15,7 +15,14 @@ namespace RedMeansGo.Pathing
 
         public static IEnumerator<Vector2> GetRandom()
         {
-
+            int rand = m_Random.Next(0, 1);
+            switch (rand)
+            {
+                case 0:
+                    return new BoringPath().YieldPositions(m_Random.Next(0, 2) == 0).GetEnumerator();
+                default:
+                    return null;
+            }
         }
     }
 }

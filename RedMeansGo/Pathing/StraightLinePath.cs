@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace RedMeansGo
 {
-    public class StraightLinePath : IPathing
+    public class StraightLinePath : IPath
     {
         public IEnumerable<Vector2> YieldPositions(params object[] arguments)
         {

@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Audio;
 using System.Collections.ObjectModel;
 using Microsoft.Xna.Framework.Input;
 using Protogame.SHMUP;
+using RedMeansGo.Entities;
 
 namespace RedMeansGo
 {
@@ -79,6 +80,10 @@ namespace RedMeansGo
                         Speed = 3 * (float)m_Random.NextDouble() + 1
                     }
                     );
+
+            // Create some enemies.
+            if (m_Random.NextDouble() < 0.1)
+                this.Entities.Add(new Enemy());
 
             // Cast first.
             RedMeansGo.Entities.Player player = this.Player as RedMeansGo.Entities.Player;

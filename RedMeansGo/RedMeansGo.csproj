@@ -45,7 +45,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="RedMeansGoWorld.cs" />
-    <Compile Include="RedMeansGoGame.cs" />
+    <Compile Include="RedMeansGoGame.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Pathing\StraightLinePath.cs" />
     <Compile Include="Heartbeat\HeartbeatEnumerator.cs" />
     <Compile Include="Entities\EnemyGenerator.cs" />
@@ -88,6 +90,33 @@
     <None Include="Content\star.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\enemy\enemy1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\enemy\enemy2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\enemy\enemy3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\enemy\enemy4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\enemy\enemy5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\enemy\enemy6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\enemy\enemy7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\enemy\enemy8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\enemy\enemy9.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -97,6 +126,7 @@
     <Folder Include="Heartbeat\" />
     <Folder Include="Pathing\" />
     <Folder Include="Weapons\" />
+    <Folder Include="Content\enemy\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.desktop">
