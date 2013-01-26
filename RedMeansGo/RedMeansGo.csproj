@@ -46,7 +46,6 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="RedMeansGoWorld.cs" />
     <Compile Include="RedMeansGoGame.cs" />
-    <Compile Include="Pathing\IPathing.cs" />
     <Compile Include="Pathing\StraightLinePath.cs" />
     <Compile Include="Heartbeat\HeartbeatEnumerator.cs" />
     <Compile Include="Entities\EnemyGenerator.cs" />
@@ -57,6 +56,10 @@
     <Compile Include="Weapons\StrangeBullet.cs" />
     <Compile Include="Weapons\StrangeWeapon.cs" />
     <Compile Include="Entities\Star.cs" />
+    <Compile Include="Entities\Enemy.cs" />
+    <Compile Include="Pathing\PathSelector.cs" />
+    <Compile Include="Pathing\BoringPath.cs" />
+    <Compile Include="Pathing\IPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />

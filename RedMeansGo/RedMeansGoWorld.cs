@@ -34,8 +34,8 @@ namespace RedMeansGo
             {
                 this.BackgroundColor = new Color(
                     (float)(
-                        ((1 - (this.Player as Entities.Player).Health) * 0.2) +
-                    ((1 - (this.Player as Entities.Player).Health) * 0.1) *
+                        ((1 - (this.Player as Entities.Player).Health) * 0.05) +
+                    ((1 - (this.Player as Entities.Player).Health) * 0.15) *
                     (this.Heartbeats.Current / 2 + 0.5)
                     ),
                     0,

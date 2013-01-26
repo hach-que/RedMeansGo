@@ -21,8 +21,8 @@ namespace RedMeansGo.Entities
             if (this.Y > Tileset.TILESET_PIXEL_HEIGHT)
                 world.Entities.Remove(this);
 
-            this.Color = new Color(255, 255 - (world as RedMeansGoWorld).BackgroundColor.R * 2,
-                                   255 - (world as RedMeansGoWorld).BackgroundColor.R * 2);
+            this.Color = new Color(255, 255 - (world as RedMeansGoWorld).BackgroundColor.R * 10,
+                                   255 - (world as RedMeansGoWorld).BackgroundColor.R * 10);
 
             base.Update(world);
         }

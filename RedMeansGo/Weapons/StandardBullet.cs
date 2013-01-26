@@ -13,13 +13,15 @@ namespace RedMeansGo.Weapons
     {
         public StandardBullet()
         {
-            this.m_RotationSpeed = (float)m_Random.NextDouble() * 0.1f;
+            this.m_RotationSpeed = (float)m_Random.NextDouble() * 0.5f;
             this.m_Direction = -MathHelper.PiOver2;
             this.m_Speed = 5f;
-            this.Color = new Color(
+            this.Color = new Color(255, 0, 0);
+                /*
                 (float)m_Random.NextDouble(), 
                 (float)m_Random.NextDouble(), 
                 (float)m_Random.NextDouble());
+                */
         }
     }
 }

@@ -55,8 +55,8 @@ namespace RedMeansGo.Entities
 
             double heartbeat = (world as RedMeansGoWorld).Heartbeats.Current;
             if (this.Health <= 0) heartbeat = -0.4; // You're dead :(
-            this.Width = (int)(WIDTH * (heartbeat * 0.2 + 1));
-            this.Height = (int)(HEIGHT * (heartbeat * 0.2 + 1));
+            this.Width = (int)(WIDTH * (heartbeat * 0.15 + 1));
+            this.Height = (int)(HEIGHT * (heartbeat * 0.15 + 1));
             //this.Origin = new Vector2(this.Width / 2, this.Height / 2);
         }
 
