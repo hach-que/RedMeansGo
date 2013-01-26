@@ -19,7 +19,7 @@ namespace RedMeansGo
         public override void DrawBelow(GameContext context)
         {
             // Clear the screen.
-            context.Graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
+            context.Graphics.GraphicsDevice.Clear(Color.Black);
         }
 
         public override void DrawAbove(GameContext context)

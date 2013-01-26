@@ -13,6 +13,8 @@ namespace Protogame
     {
         private void DrawSpriteAt(GameContext context, float x, float y, int width, int height, string image, Color color, bool flipX, double rotation, Vector2 origin)
         {
+			if (!context.Textures.ContainsKey(image))
+				throw new InvalidOperationException("The image '" + image + "' has not yet been loaded.");
             if (flipX)
                 context.SpriteBatch.Draw(
                     context.Textures[image],
@@ -56,7 +58,7 @@ namespace Protogame
         public void Draw(GameContext context)
         {
             // Clear the screen.
-            context.SpriteBatch.Begin();
+			context.SpriteBatch.Begin();
 
             // Draw world below.
             context.World.DrawBelow(context);

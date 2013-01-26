@@ -54,8 +54,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="MonoGame.Framework, Version=3.0.0.0, Culture=neutral">
-      <Private>False</Private>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\Libraries\MonoGameOnLinux\MonoGame.Framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +115,7 @@
     <Compile Include="SHMUP\ShmupGame.cs" />
     <Compile Include="SHMUP\ShmupWorld.cs" />
     <Compile Include="SHMUP\Player.cs" />
+    <Compile Include="OTKWorkaround.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

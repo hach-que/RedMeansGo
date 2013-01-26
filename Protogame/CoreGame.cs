@@ -12,6 +12,7 @@ namespace Protogame
     {
         protected GameContext m_GameContext = null;
         private WorldManager m_WorldManager = null;
+        private OTKWorkaround m_OTKWorkaround = new OTKWorkaround();
 
         public T World
         {
@@ -73,6 +74,9 @@ namespace Protogame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected sealed override void Update(GameTime gameTime)
         {
+            // Fix OTK bugs...
+            this.m_OTKWorkaround.FixOTKBugsOnLinux(this.m_GameContext.Graphics);
+
             // Allows the game to exit
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();

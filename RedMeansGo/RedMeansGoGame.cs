@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 using Protogame.SHMUP;
+using RedMeansGo.Entities;
 
 namespace RedMeansGo
 {
@@ -21,12 +22,13 @@ namespace RedMeansGo
     {
         public RedMeansGoGame()
         {
-            this.m_GameContext.Graphics.PreferredBackBufferWidth = 800;
-            this.m_GameContext.Graphics.PreferredBackBufferHeight = 600;
+            this.m_GameContext.Graphics.IsFullScreen = true;
+            this.m_GameContext.Graphics.PreferredBackBufferWidth = 1920;
+            this.m_GameContext.Graphics.PreferredBackBufferHeight = 1080;
 
             // Create initial blank level.
             this.World.CreateBlankLevel("world");
-			this.World.SpawnPlayer<Player>(200, 200);
+			this.World.SpawnPlayer<RedMeansGo.Entities.Player>(200, 200);
         }
 
         /// <summary>
@@ -53,9 +55,8 @@ namespace RedMeansGo
 
             // Load all the textures.
             this.m_GameContext.LoadFont("Arial");
-            this.m_GameContext.LoadTexture("tiles");
-            this.m_GameContext.LoadTexture("black"); // Needed for FadingWorld to work (you can remove this if you don't use FadingWorld).
-            this.m_GameContext.LoadTextureAnim("player.frame", 5);
+            this.m_GameContext.LoadTexture("player.main");
+            this.m_GameContext.LoadTexture("player.powerup");
             this.m_GameContext.LoadAudio("audio.sfx.example");
         }
 

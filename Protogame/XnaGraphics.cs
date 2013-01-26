@@ -42,15 +42,17 @@ namespace Protogame
             this.m_Context.SpriteBatch.DrawString(this.m_Context.Fonts[font], text, new Vector2((int)(x - size.X / 2), (int)y), Color.White);
         }
 
-        public void DrawSprite(int x, int y, int width, int height, string image, Color color, bool flipX, double rotation = 0)
+        public void DrawSprite(int x, int y, int width, int height, string image, Color color, bool flipX, double rotation = 0, Vector2? origin = null)
         {
+            if (!this.m_Context.Textures.ContainsKey(image))
+                throw new InvalidOperationException("The image '" + image + "' has not yet been loaded.");
             this.m_Context.SpriteBatch.Draw(
                 this.m_Context.Textures[image],
                 new Rectangle(x, y, width, height),
                 null,
                 color.ToPremultiplied(),
                 (float)rotation,
-                new Vector2(0, 0),
+                origin ?? new Vector2(0, 0),
                 SpriteEffects.FlipHorizontally,
                 0
             );
