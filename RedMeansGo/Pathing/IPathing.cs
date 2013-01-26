@@ -6,7 +6,7 @@ namespace RedMeansGo
 {
     public interface IPathing
     {
-        IEnumerable<Vector2> YieldPositions(double x, double y, int direction);
+        IEnumerable<Vector2> YieldPositions(params object[] arguments);
     }
 }
 
